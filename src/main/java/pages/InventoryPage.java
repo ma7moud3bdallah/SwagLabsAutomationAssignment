@@ -2,12 +2,16 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class InventoryPage {
     // Fields
     private WebDriver driver;
-    private By cartIcon = By.cssSelector("div[id='shopping_cart_container'] > a");
-    private By inventoryItems = By.className("inventoryItems");
+    private By inventoryPageTitle = By.className("app_logo");
+    private By cartIcon = By.className("shopping_cart_link");
+    private By inventoryPageProducts = By.xpath("//div[@class='inventory_list']/div");
 
     // Constructor
     public InventoryPage(WebDriver driver){
@@ -15,13 +19,13 @@ public class InventoryPage {
     }
 
     // Methods
-    public void getTitle(){
-        driver.getTitle();
+    public String getInventoryPageTitle(){
+        return driver.findElement(inventoryPageTitle).getText();
     }
-    public boolean isCartIconDisplayed(){
-        return driver.findElement(cartIcon).isDisplayed();
+    public void selectCartIcon(){
+        driver.findElement(cartIcon);
     }
-    public int getProductsCount(){
-        return driver.findElements(inventoryItems).size();
+    public List<WebElement> getInventoryProducts(){
+        return driver.findElements(inventoryPageProducts);
     }
 }

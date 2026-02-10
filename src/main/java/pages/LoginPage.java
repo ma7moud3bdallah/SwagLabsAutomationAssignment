@@ -23,11 +23,11 @@ public class LoginPage {
     public void setPasswordField(String password){
         driver.findElement(passwordField).sendKeys(password);
     }
+    public String getErrorMessage(){
+        return driver.findElement(errorMessage).getText();
+    }
     public InventoryPage clickLoginButton(){
         driver.findElement(loginButton).click();
         return new InventoryPage(driver);
-    }
-    public String getErrorMessage(){
-        return driver.findElement(errorMessage).getText();
     }
 }
