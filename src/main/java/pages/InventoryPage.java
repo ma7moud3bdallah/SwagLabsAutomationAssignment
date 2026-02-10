@@ -22,8 +22,8 @@ public class InventoryPage {
     public String getInventoryPageTitle(){
         return driver.findElement(inventoryPageTitle).getText();
     }
-    public void selectCartIcon(){
-        driver.findElement(cartIcon);
+    public boolean isCartIconDisplayed(){
+        return driver.findElement(cartIcon).isDisplayed();
     }
     public List<WebElement> getInventoryProducts(){
         return driver.findElements(inventoryPageProducts);
