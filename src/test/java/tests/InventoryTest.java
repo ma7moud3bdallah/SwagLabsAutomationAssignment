@@ -8,18 +8,21 @@ import pages.InventoryPage;
 
 public class InventoryTest extends baseTest {
     @BeforeMethod
-    public void testSuccessfulLogin(){
+    public void successfulLogin(){
         loginPage.setUsernameField("standard_user");
         loginPage.setPasswordField("secret_sauce");
+        inventoryPage = loginPage.clickLoginButton();
     }
     @Test
     public void testPageTitle(){
-        InventoryPage inventoryPage = loginPage.clickLoginButton();
-        Assert.assertTrue(inventoryPage.getInventoryPageTitle().equals("Swag Labs"),"Page title is incorrect");
+        Assert.assertEquals(inventoryPage.getInventoryPageTitle(),"Swag Labs","Page title is incorrect");
     }
     @Test
     public void testCartIconDisplayed(){
-        InventoryPage inventoryPage = loginPage.clickLoginButton();
-        Assert.assertTrue(inventoryPage.isCartIconDisplayed(),"Cart icon is not displayed");
+        Assert.assertTrue(inventoryPage.getCartIcon().isDisplayed(),"Cart icon is not displayed");
+    }
+    @Test
+    public void testInventoryPageProducts(){
+        Assert.assertEquals(inventoryPage.getInventoryProducts().size(),6,"Products displayed is incorrect");
     }
 }

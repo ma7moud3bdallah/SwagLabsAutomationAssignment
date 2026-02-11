@@ -4,12 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
+import pages.InventoryPage;
 import pages.LoginPage;
 
 public class baseTest {
     // Fields
     protected WebDriver driver;
     protected LoginPage loginPage;
+    protected InventoryPage inventoryPage;
 
     // Methods
     @BeforeMethod
