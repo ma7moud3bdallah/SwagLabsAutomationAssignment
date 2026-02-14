@@ -1,15 +1,16 @@
 package tests;
 
-import base.baseTest;
+import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.InventoryPage;
 
-public class LoginTest extends baseTest {
+public class LoginTest extends BaseTest {
     @Test
     public void testSuccessfulLogin(){
         loginPage.setUsernameField("standard_user");
         loginPage.setPasswordField("secret_sauce");
-        loginPage.clickLoginButton();
+        InventoryPage inventoryPage = loginPage.clickLoginButton();
         Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),"User was not successfully navigated to inventory page");
     }
     @Test
