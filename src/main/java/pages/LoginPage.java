@@ -9,7 +9,7 @@ public class LoginPage {
     private By usernameField = By.id("user-name");
     private By passwordField = By.id("password");
     private By loginButton = By.id("login-button");
-    private By errorMessage = By.cssSelector("h3[data-test='error']");
+    private By errorMessage = By.tagName("h3");
 
     // Constructor
     public LoginPage(WebDriver driver){
@@ -17,17 +17,17 @@ public class LoginPage {
     }
 
     // Methods
-    public void setUsernameField(String username){
+    public void setUsername(String username){
         driver.findElement(usernameField).sendKeys(username);
     }
-    public void setPasswordField(String password){
+    public void setPassword(String password){
         driver.findElement(passwordField).sendKeys(password);
+    }
+    public InventoryPage clickLogin(){
+        driver.findElement(loginButton).click();
+        return new InventoryPage(driver);
     }
     public String getErrorMessage(){
         return driver.findElement(errorMessage).getText();
-    }
-    public InventoryPage clickLoginButton(){
-        driver.findElement(loginButton).click();
-        return new InventoryPage(driver);
     }
 }

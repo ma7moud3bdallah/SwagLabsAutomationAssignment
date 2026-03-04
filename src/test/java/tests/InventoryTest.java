@@ -9,45 +9,36 @@ import pages.InventoryPage;
 public class InventoryTest extends BaseTest {
     private InventoryPage inventoryPage;
     @BeforeMethod
-    public void successfulLogin(){
-        loginPage.setUsernameField("standard_user");
-        loginPage.setPasswordField("secret_sauce");
-        inventoryPage = loginPage.clickLoginButton();
+    public void userSuccessfulLogin(){
+        loginPage.setUsername("standard_user");
+        loginPage.setPassword("secret_sauce");
+        inventoryPage = loginPage.clickLogin();
     }
     @Test
     public void testPageTitle(){
-        Assert.assertEquals(inventoryPage.getInventoryPageTitle(),"Swag Labs","Page title is incorrect");
+        Assert.assertEquals(inventoryPage.getInventoryPageTitle(),"Swag Labs","Incorrect page title");
     }
     @Test
-    public void testCartIconDisplayed(){
-        Assert.assertTrue(inventoryPage.getCartIcon().isDisplayed(),"Cart icon is not displayed");
+    public void testCartIcon(){
+        Assert.assertTrue(inventoryPage.isCartIconDisplayed(),"Cart icon is not displayed");
     }
     @Test
-    public void testInventoryPageProducts(){
-        Assert.assertEquals(inventoryPage.getInventoryProducts().size(),6,"Products displayed is incorrect");
+    public void testNumberOfProducts(){
+        Assert.assertEquals(inventoryPage.getInventoryProductsNumber(),6,"Products displayed is not 6");
     }
     @Test
-    public void testLinkedinICon(){
-        inventoryPage.clickLinkedinIcon();
-        for(String handle:driver.getWindowHandles()){
-            driver.switchTo().window(handle);
-        }
+    public void testLinkedinUrl(){
+        inventoryPage.getLinkedinUrl();
         Assert.assertTrue(driver.getCurrentUrl().contains("linkedin"),"LinkedIn did not open correctly");
     }
     @Test
-    public void testFacebookIcon(){
-        inventoryPage.clickFacebookIcon();
-        for(String handle:driver.getWindowHandles()){
-            driver.switchTo().window(handle);
-        }
+    public void testFacebookUrl(){
+        inventoryPage.getFacebookUrl();
         Assert.assertTrue(driver.getCurrentUrl().contains("facebook"),"Facebook did not open correctly");
     }
     @Test
-    public void testTwitterIcon(){
-        inventoryPage.clickTwitterIcon();
-        for(String handle:driver.getWindowHandles()){
-            driver.switchTo().window(handle);
-        }
+    public void testTwitterUrl(){
+        inventoryPage.getTwitterUrl();
         Assert.assertTrue(driver.getCurrentUrl().contains("x.com"),"Twitter did not open correctly");
     }
 }

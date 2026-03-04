@@ -3,28 +3,27 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.InventoryPage;
 
 public class LoginTest extends BaseTest {
-    @Test
+    @Test(priority = 1)
     public void testSuccessfulLogin(){
-        loginPage.setUsernameField("standard_user");
-        loginPage.setPasswordField("secret_sauce");
-        InventoryPage inventoryPage = loginPage.clickLoginButton();
-        Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),"User was not successfully navigated to inventory page");
+        loginPage.setUsername("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLogin();
+        Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),"User not redirected to the Inventory page");
     }
-    @Test
+    @Test(priority = 2)
     public void testInvalidLogin(){
-        loginPage.setUsernameField("standard.user");
-        loginPage.setPasswordField("secret.sauce");
-        loginPage.clickLoginButton();
-        Assert.assertTrue(loginPage.getErrorMessage().contains("do not match"),"User was able to login with invalid credentials");
+        loginPage.setUsername("mahmoud123");
+        loginPage.setPassword("123456");
+        loginPage.clickLogin();
+        Assert.assertTrue(loginPage.getErrorMessage().contains("Username and password do not match"),"User can login with invalid username and password");
     }
-    @Test
-    public void testLoginWithoutPassword(){
-        loginPage.setUsernameField("standard_user");
-        loginPage.setPasswordField("");
-        loginPage.clickLoginButton();
-        Assert.assertTrue(loginPage.getErrorMessage().contains("Password is required"),"User was able to login without password");
+    @Test(priority = 3)
+    public void testWithoutPassword(){
+        loginPage.setUsername("standard_user");
+        loginPage.setPassword("");
+        loginPage.clickLogin();
+        Assert.assertTrue(loginPage.getErrorMessage().contains("Password is required"),"User can login without password");
     }
 }
